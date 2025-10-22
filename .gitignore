@@ -1,0 +1,48 @@
+# ==========================================
+# C / C++ PROJECT (Visual Studio Code + MinGW/MSYS2)
+# ==========================================
+
+# --- Compiled binaries ---
+*.exe
+*.dll
+*.obj
+*.o
+*.a
+*.so
+*.out
+*.lib
+
+# --- Debug / build files ---
+*.pdb
+*.idb
+*.ilk
+*.exp
+*.dbg
+*.dSYM/
+
+# --- VS Code specific files ---
+.vscode/
+# (Opcional: se quiser versionar tasks.json e launch.json, remova a linha acima)
+# .vscode/ pode ser ignorado se as configs são específicas da sua máquina
+
+# --- Backup / temp files ---
+*~
+*.tmp
+*.log
+*.bak
+*.swp
+*.swo
+*.DS_Store
+Thumbs.db
+
+# --- MSYS2 / GCC specific cache ---
+*.stackdump
+
+# --- Output folders (if any) ---
+/build/
+/bin/
+/obj/
+/dist/
+
+# --- System files ---
+desktop.ini

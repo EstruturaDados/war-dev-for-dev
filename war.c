@@ -16,15 +16,38 @@
 
 // Inclusão das bibliotecas padrão necessárias para entrada/saída, alocação de memória, manipulação de strings e tempo.
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <locale.h>
+
 // --- Constantes Globais ---
 // Definem valores fixos para o número de territórios, missões e tamanho máximo de strings, facilitando a manutenção.
+
+#define QTD_TERRITORIOS 5
+#define MAX_MISSOES 5
+#define TAM_STRING 50
 
 // --- Estrutura de Dados ---
 // Define a estrutura para um território, contendo seu nome, a cor do exército que o domina e o número de tropas.
 
+typedef struct
+{
+    char nome[TAM_STRING];
+    char cor [TAM_STRING];
+    int tropas;
+}Territorio;
+
+
 // --- Protótipos das Funções ---
 // Declarações antecipadas de todas as funções que serão usadas no programa, organizadas por categoria.
 // Funções de setup e gerenciamento de memória:
+// limparBuffer():
+// Função utilitária para limpar o buffer de entrada do teclado (stdin), evitando problemas com leituras consecutivas de scanf e getchar.
+void limparBuffer(){
+    int entrada;
+    while((entrada=getchar())!= '\n' && entrada != EOF);
+}
 // Funções de interface com o usuário:
 // Funções de lógica principal do jogo:
 // Função utilitária:
@@ -34,9 +57,29 @@
 int main() {
     // 1. Configuração Inicial (Setup):
     // - Define o locale para português.
+    setlocale(LC_ALL, "Portuguese");
     // - Inicializa a semente para geração de números aleatórios com base no tempo atual.
     // - Aloca a memória para o mapa do mundo e verifica se a alocação foi bem-sucedida.
+    Territorio mapa[QTD_TERRITORIOS];
+
+    printf("--- CADASTRO DOS %d TERRITORIOS ---\n",QTD_TERRITORIOS);
     // - Preenche os territórios com seus dados iniciais (tropas, donos, etc.).
+    for(int i = 0; i < QTD_TERRITORIOS; i++)
+    {
+        printf("Digite o nome do Territorio %d: ",i+1);
+        fgets(mapa[i].nome, TAM_STRING, stdin);
+        printf("Digite a cor do Territorio %d: ",i+1);
+        fgets(mapa[i].cor, TAM_STRING, stdin);
+        printf("Digite o numero de Tropas do Territorio %d: ", i + 1);
+        scanf("%d", &mapa[i].tropas);
+        limparBuffer();
+    }
+
+    printf("\n--- RELATORIO ATUAL DO MAPA ---\n");
+    for(int i = 0; i < QTD_TERRITORIOS; i++)
+    {
+        printf("Territorio: %s | Cor: %s | Tropas: %d\n", mapa[i].nome, mapa[i].cor, mapa[i].tropas);
+    }
     // - Define a cor do jogador e sorteia sua missão secreta.
 
     // 2. Laço Principal do Jogo (Game Loop):
@@ -94,5 +137,4 @@ int main() {
 // Implementa a lógica para cada tipo de missão (destruir um exército ou conquistar um número de territórios).
 // Retorna 1 (verdadeiro) se a missão foi cumprida, e 0 (falso) caso contrário.
 
-// limparBufferEntrada():
-// Função utilitária para limpar o buffer de entrada do teclado (stdin), evitando problemas com leituras consecutivas de scanf e getchar.
+
